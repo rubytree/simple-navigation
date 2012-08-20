@@ -51,6 +51,7 @@ module SimpleNavigation
 
       def consider_sub_navigation?(item)
         return false if item.sub_navigation.nil?
+        return true if item.always_expand
         case level
         when :all
           return true
@@ -63,7 +64,7 @@ module SimpleNavigation
       end
 
       def expand_sub_navigation?(item)
-        expand_all? || item.selected?
+        expand_all? || item.selected? || item.always_expand
       end
 
       # to allow overriding when there is specific logic determining
